@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './StoreFront.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./StoreFront.css";
 
 class StoreFront extends Component {
     constructor() {
@@ -8,16 +8,17 @@ class StoreFront extends Component {
 
         this.state = {
             products: []
-        }
+        };
     }
 
     componentDidMount() {
-        axios.get("https://practiceapi.devmountain.com/products/")
-            .then((response) => {
+        axios
+            .get("https://practiceapi.devmountain.com/products/")
+            .then(response => {
                 this.setState({
-                    products: response
-                })
-            })
+                    products: response.data
+                });
+            });
     }
 
     render() {
@@ -28,15 +29,15 @@ class StoreFront extends Component {
                     <img src={element.image} alt="" />
                     <h2>{element.desc}</h2>
                     <h3>{"$" + element.price + ".00"}</h3>
-                    <button onClick={() => this.props.addToShoppingCart(element)}>Purchase!</button>
+                    <button
+                        onClick={() => this.props.addToShoppingCart(element)}
+                    >
+                        Purchase!
+                    </button>
                 </div>
-            )
-        })
-        return (
-            <div className="storefront-container">
-                {productDisplay}
-            </div>
-        )
+            );
+        });
+        return <div className="storefront-container">{productDisplay}</div>;
     }
 }
 
